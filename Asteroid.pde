@@ -1,0 +1,16 @@
+class Asteroid extends Floater{
+  Asteroid(double ax, double ay, double adir, double aspeed, float asize) {
+    myCenterX = ax;
+    myCenterY = ay;
+    myPointDirection = adir;
+    speed = aspeed;
+    mySize = asize;
+    corners = 3;
+    xCorners = new int[3];
+    yCorners = new int[3];
+  }
+  public void show() {
+    fill(color(171, 111, 0));
+    //ellipse((float)(myCenterX-globalx), (float)(myCenterY-globaly), mySize, mySize);
+  }
+}
