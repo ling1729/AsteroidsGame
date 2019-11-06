@@ -1,4 +1,4 @@
-class Asteroid extends Floater{
+class Asteroid extends Space{
   Asteroid(double ax, double ay, double adir, double aspeed, float asize) {
     myCenterX = ax;
     myCenterY = ay;

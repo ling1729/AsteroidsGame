@@ -11,6 +11,7 @@ int count = 0;
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 ArrayList<Star> stars = new ArrayList<Star>();
 ArrayList<ArrayList<Star>> starChunks = new ArrayList<ArrayList<Star>>();
+ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 Spaceship player;
 public void setup() 
 {
@@ -44,8 +45,21 @@ public void draw()
 		count = 0;
 		generateAst((float)globalx - 100, (float)globalx, (float)globalx + sizew, (float)globalx + sizew + 100, (float)globaly - 100, (float)globaly, (float) globaly + sizeh, (float) globaly + sizeh + 100, (float)1, (float)3, 1);
 	}
+	count2++;
+  if (keyPressed) {
+    if (key==(char)32) {
+      if(count2>10){
+        bullets.add(new Bullet(globalx + 250,globaly + 250, (double) 10, player.getPointDirection()));
+        count2=0;
+      }
+    }
+  }
+  for(int i = 0; i < bullets.size(); i++){
+    bullets.get(i).update();
+    bullets.get(i).show();
+  }
 }
-
+int count2 = 0;
 public void generateAst(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float sp1, float sp2, int num) {
 	//System.out.println(arlength);
 	for (int i = 0; i < num; i++) {

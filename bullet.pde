@@ -1,0 +1,13 @@
+class Bullet extends Space {
+  Bullet(double ax, double ay, double ar, double adir) {
+    this.myCenterX = ax;
+    this.myCenterY = ay;
+    this.mySize = (float) ar;
+    this.myPointDirection = adir;
+    speed = 20;
+  }
+  public void show(){
+    fill(255,0,0);
+    ellipse((float) (myCenterX - globalx), (float) (myCenterY - globaly), mySize, mySize);
+  } 
+}
