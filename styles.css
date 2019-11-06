@@ -1,9 +1,10 @@
-
 body {
-    background-color: rgb(200,200,200);
-    color: rgb(0,0,0);
+    background-color: rgb(0,0,0);
     font-family: "Open Sans", sans-serif;
     text-align: center;
+}
+h1{
+	color: rgb(255, 255, 255);
 }
 
 #content {
@@ -17,7 +18,7 @@ header {
 }
 
 footer {
+	color: rgb(255, 255, 255);
 	font-style: italic;
-	font-size: 90%;
+	font-size: 110%;
 }
-
