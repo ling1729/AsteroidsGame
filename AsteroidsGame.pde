@@ -1,23 +1,30 @@
 //your variable declarations here
-double globalx = 0;
-double globaly = 0;
-int chunky;
-int chunkx;
-int sizew = 500;
-int sizeh = 500;
-float minStarSize = 1;
-float maxStarSize = 10;
-int count = 0;
-ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
-ArrayList<Star> stars = new ArrayList<Star>();
-ArrayList<ArrayList<Star>> starChunks = new ArrayList<ArrayList<Star>>();
-ArrayList<Bullet> bullets = new ArrayList<Bullet>();
-Spaceship player;
+private double globalx = 0;
+private double globaly = 0;
+private int chunky;
+private int chunkx;
+private int sizew = 500;
+private int sizeh = 500;
+private float minStarSize = 1;
+private float maxStarSize = 10;
+private int count = 0;
+private int count2 = 0;
+private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+private ArrayList<Star> stars = new ArrayList<Star>();
+private ArrayList<ArrayList<Star>> starChunks = new ArrayList<ArrayList<Star>>();
+private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+private Spaceship player;
 public void setup() 
 {
 	player = new Spaceship((float) sizew / 2, (float) sizeh / 2, PI);
 	size(500, 500);
-	generateAst((float)globalx-100, (float)globalx, (float)globalx+sizew, (float)globalx+sizew+100, (float)globaly-100, (float)globaly, (float) globaly+sizeh, (float) globaly+sizeh+100, 1, 3, 10);
+	generateAst(
+		(float) globalx - 100,
+		(float) globalx, 
+		(float) globalx + sizew, (float)globalx + sizew+100, 
+		(float) globaly - 100, (float)globaly, (float) globaly + sizeh, 
+		(float) globaly + sizeh + 100, 1, 3, 10
+	);
 	for (int i =- 1; i < 2; i++) {
 		for (int j =- 1; j < 2; j++) {
 			genChunk(i, j);
@@ -30,7 +37,6 @@ public void draw()
 {
 	background(0);
 	drawStars();
-
 	for (int i = 0; i < asteroids.size(); i++) {
 		asteroids.get(i).show();
 		asteroids.get(i).update();
@@ -43,14 +49,14 @@ public void draw()
 	count++;
 	if (count == 8) {
 		count = 0;
-		generateAst((float)globalx - 100, (float)globalx, (float)globalx + sizew, (float)globalx + sizew + 100, (float)globaly - 100, (float)globaly, (float) globaly + sizeh, (float) globaly + sizeh + 100, (float)1, (float)3, 1);
+		generateAst((float)globalx - 100, (float)globalx, (float)globalx + sizew, (float)globalx + sizew + 100, (float)globaly - 100, (float)globaly, (float) globaly + sizeh, (float) globaly + sizeh + 100, (float) 1, (float) 3, 1);
 	}
 	count2++;
   if (keyPressed) {
-    if (key==(char)32) {
+    if (key == (char)32) {
       if(count2>10){
         bullets.add(new Bullet(globalx + 250,globaly + 250, (double) 10, player.getPointDirection()));
-        count2=0;
+        count2 = 0;
       }
     }
   }
@@ -59,7 +65,6 @@ public void draw()
     bullets.get(i).show();
   }
 }
-int count2 = 0;
 public void generateAst(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float sp1, float sp2, int num) {
 	//System.out.println(arlength);
 	for (int i = 0; i < num; i++) {
@@ -84,7 +89,7 @@ public long getmill() {
 	long nowMillis = System.currentTimeMillis();
 	return nowMillis;
 }
-void generateStar(float x1, float x2, float y1, float y2, float size1, float size2, int num) {
+public void generateStar(float x1, float x2, float y1, float y2, float size1, float size2, int num) {
 	for (int i = 0; i < num; i++) {
 		stars.add(new Star(randnum(x1, x2, x1, x2), randnum(y1, y2, y1, y2), randnum(size1, size2, size1, size2)));
 	}

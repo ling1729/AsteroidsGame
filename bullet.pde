@@ -1,5 +1,5 @@
 class Bullet extends Space {
-  Bullet(double ax, double ay, double ar, double adir) {
+  public Bullet(double ax, double ay, double ar, double adir) {
     this.myCenterX = ax;
     this.myCenterY = ay;
     this.mySize = (float) ar;
@@ -11,3 +11,4 @@ class Bullet extends Space {
     ellipse((float) (myCenterX - globalx), (float) (myCenterY - globaly), mySize, mySize);
   } 
 }
+//bullet class

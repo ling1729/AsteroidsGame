@@ -1,14 +1,14 @@
 class Spaceship extends Space
 {   
-	float size = 20;
-	float xVel = 0;
-	float yVel = 0;
-	float xAccel = 0, yAccel=0;
-	float friction = 0.05;
-	float speed = 0.75f;
-	float accel = 0.15f;
-	float leng = size / sqrt(3);
-    Spaceship(float ax, float ay, float rotat) {
+	private float size = 20;
+	private float xVel = 0;
+	private float yVel = 0;
+	private float xAccel = 0, yAccel=0;
+	private float friction = 0.05;
+	private float speed = 0.75f;
+	private float accel = 0.15f;
+	private float leng = size / sqrt(3);
+    public Spaceship(float ax, float ay, float rotat) {
     	myCenterX = (float) sizew / 2;
     	myCenterY = (float) sizeh / 2;
 		myPointDirection = rotat;

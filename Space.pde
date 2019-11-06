@@ -45,3 +45,4 @@ abstract class Space extends Floater //Do NOT modify the Floater class! Make cha
 		translate(-1 * (float)myCenterX, -1 * (float)myCenterY);
 	}   
 } 
+//modified floater so I can work with it easier

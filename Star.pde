@@ -1,10 +1,10 @@
 class Star extends Space //note that this class does NOT extend Floater (mine does so idk)
 {
-	float distance = 0.1;
-	float sizeEffect = 0.5;
-	double startx = globalx;
-	double starty = globaly;
-	Star(float ax, float ay, float asize) {
+	private float distance = 0.1;
+	private float sizeEffect = 0.5;
+	private double startx = globalx;
+	private double starty = globaly;
+	private Star(float ax, float ay, float asize) {
 		myCenterX=ax;
 		myCenterY=ay;
 		mySize=asize;

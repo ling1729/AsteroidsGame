@@ -1,5 +1,5 @@
 class Asteroid extends Space{
-  Asteroid(double ax, double ay, double adir, double aspeed, float asize) {
+  private Asteroid(double ax, double ay, double adir, double aspeed, float asize) {
     myCenterX = ax;
     myCenterY = ay;
     myPointDirection = adir;
