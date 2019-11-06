@@ -5,12 +5,9 @@ class Asteroid extends Floater{
     myPointDirection = adir;
     speed = aspeed;
     mySize = asize;
-    corners = 3;
-    xCorners = new int[3];
-    yCorners = new int[3];
   }
   public void show() {
     fill(color(171, 111, 0));
-    //ellipse((float)(myCenterX-globalx), (float)(myCenterY-globaly), mySize, mySize);
+    ellipse((float)(myCenterX-globalx), (float)(myCenterY-globaly), mySize, mySize);
   }
 }
