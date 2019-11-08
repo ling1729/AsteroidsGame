@@ -8,9 +8,9 @@ class Spaceship extends Space
 	private float speed = 0.75f;
 	private float accel = 0.15f;
 	private float leng = size / sqrt(3);
-    public Spaceship(float ax, float ay, float rotat) {
-    	myCenterX = (float) sizew / 2;
-    	myCenterY = (float) sizeh / 2;
+  public Spaceship(float ax, float ay, float rotat) {
+    myCenterX = (float) sizew / 2;
+    myCenterY = (float) sizeh / 2;
 		myPointDirection = rotat;
 		myColor = color(64, 108, 255);
 		corners = 3;
