@@ -15,8 +15,16 @@ class Spaceship extends Space
 		myColor = color(64, 108, 255);
 		corners = 3;
 	}
-	public void update() {
+	public void setSpeed(float velX, float velY, float accelX, float accelY){
+		xVel = velX;
+		yVel = velY;
+		xAccel = accelX;
+		yAccel = accelY;
+	}
+	public void updateDirection(){
 		myPointDirection = getAngle(sizew/2, sizeh/2, mouseX, mouseY);
+	}
+	public void update(){
 		if (mousePressed == true) {
 			xAccel = cos((float) myPointDirection)*accel;
 			yAccel = sin((float) myPointDirection)*accel;
@@ -40,16 +48,16 @@ class Spaceship extends Space
 			yVel += friction;
 		}
 	}
+	public void setCoords(float[] xCoords, float[] yCoords){
+		xCorners = xCoords;
+		yCorners = yCoords;
+	}
+	public float getSize(){
+		return leng;
+	}
 	public void show ()  //Draws the floater at the current position  
 	{             
-		xCorners = new float[]{
-		(float) (myCenterX + leng * cos((float) myPointDirection) * 1.5),
-		(float) (myCenterX + leng * cos((float) myPointDirection + 2 * PI / 3)),
-		(float) (myCenterX + leng * cos((float) myPointDirection + 4 * PI / 3))};
-		yCorners = new float[]{
-		(float) (myCenterY + leng * sin((float) myPointDirection) * 1.5),
-		(float) (myCenterY + leng * sin((float) myPointDirection + 2 * PI / 3)),
-		(float) (myCenterY + leng * sin((float) myPointDirection + 4 * PI / 3))};
+		
 		fill(myColor);   
 		noStroke();    
 		beginShape();

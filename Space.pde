@@ -10,10 +10,14 @@ abstract class Space extends Floater //Do NOT modify the Floater class! Make cha
 	public double getY(){
 		return myCenterY;
 	}
+
 	public double getPointDirection(){
 		return myPointDirection;
 	}
-	   
+
+	public void setPointDirection(double newDirection){
+		myPointDirection = newDirection;
+	}
 	public void update()
 	{          
 		myCenterX += Math.cos(myPointDirection) * speed;    

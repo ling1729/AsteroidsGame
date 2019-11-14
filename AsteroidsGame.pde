@@ -14,6 +14,9 @@ private ArrayList<Star> stars = new ArrayList<Star>();
 private ArrayList<ArrayList<Star>> starChunks = new ArrayList<ArrayList<Star>>();
 private ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 private Spaceship player;
+
+//variable declarations
+
 public void setup() 
 {
 	player = new Spaceship((float) sizew / 2, (float) sizeh / 2, PI);
@@ -32,25 +35,68 @@ public void setup()
 	}
 	chunkx = getChunkx();
 	chunky = getChunky();
+
+	player.setCoords(new float[]{
+		(float) (player.getX() + player.getSize() * cos((float) player.getPointDirection()) * 1.5),
+		(float) (player.getX() + player.getSize() * cos((float) player.getPointDirection() + 2 * PI / 3)),
+		(float) (player.getX() + player.getSize() * cos((float) player.getPointDirection() + 4 * PI / 3))}
+		, new float[]{
+		(float) (player.getY() + player.getSize() * sin((float) player.getPointDirection()) * 1.5),
+		(float) (player.getY() + player.getSize() * sin((float) player.getPointDirection() + 2 * PI / 3)),
+		(float) (player.getY() + player.getSize() * sin((float) player.getPointDirection() + 4 * PI / 3))}
+	);
+
+	//Declare player, generate initial asteroids, and generate initial stars
+
 }
+/*public void randomCoords(double centerX, double centerY, double minCircler, double maxCircler, int points, float[] xCoords, float[] yCoords){
+	for(int i = 0; i < points; i ++){
+		xCoords[i] = minCircler + Math.random() * maxCircler
+	}
+} Random shaped asteroids, an implementation for another time */ 
+double prevMouseX = mouseX;
+double prevMouseY = mouseY;
+boolean released = false;
 public void draw() 
 {
-	background(0);
-	drawStars();
+	background(0); //clear canvas
+	drawStars(); //draw stars
 	for (int i = 0; i < asteroids.size(); i++) {
 		asteroids.get(i).show();
 		asteroids.get(i).update();
-	}
+	} //show and update asteroids
+
 	chunkUpdate();
 	clearChunk();
 	clearAst();
+
+	//update star chunks and clear asteroids that are too far away
+
+	if(mouseX != prevMouseX || mouseY != prevMouseY){
+		player.updateDirection();
+	}
+	player.setCoords(new float[]{
+			(float) (player.getX() + player.getSize() * cos((float) player.getPointDirection()) * 1.5),
+			(float) (player.getX() + player.getSize() * cos((float) player.getPointDirection() + 2 * PI / 3)),
+			(float) (player.getX() + player.getSize() * cos((float) player.getPointDirection() + 4 * PI / 3))}
+			, new float[]{
+			(float) (player.getY() + player.getSize() * sin((float) player.getPointDirection()) * 1.5),
+			(float) (player.getY() + player.getSize() * sin((float) player.getPointDirection() + 2 * PI / 3)),
+			(float) (player.getY() + player.getSize() * sin((float) player.getPointDirection() + 4 * PI / 3))}
+		);
 	player.show();
 	player.update();
+
+	//show and update player
+
 	count++;
 	if (count == 8) {
 		count = 0;
 		generateAst((float)globalx - 100, (float)globalx, (float)globalx + sizew, (float)globalx + sizew + 100, (float)globaly - 100, (float)globaly, (float) globaly + sizeh, (float) globaly + sizeh + 100, (float) 1, (float) 3, 1);
 	}
+
+	//generate a new asteroid outside vision every 8 frames (around 5 per second)
+
 	count2++;
   if (keyPressed) {
     if (key == (char)32) {
@@ -59,18 +105,30 @@ public void draw()
         count2 = 0;
       }
     }
+    if (key == 'h' && released){
+    	hyperSpace();
+    	released = false;
+    }
   }
+  //see if key is pressed and add a new bullet if there is a long enough delay
   for(int i = 0; i < bullets.size(); i++){
     bullets.get(i).update();
     bullets.get(i).show();
-  }
+  } //show and update bullets
+
+  prevMouseX = mouseX;
+  prevMouseY = mouseY;
 }
+
+void keyReleased() {
+		released = true;
+}
+
 public void generateAst(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float sp1, float sp2, int num) {
-	//System.out.println(arlength);
 	for (int i = 0; i < num; i++) {
 		asteroids.add(new Asteroid(randnum(x1, x2, x3, x4), randnum(y1, y2, y3, y4), (float)Math.random() * (2 * PI), randnum(sp1, sp2, sp2, sp2), (float)40));
 	}
-}
+} //function to generate Asteroids within given bounds
 
 public float randnum(float a, float b, float c, float d) {
 	if (Math.random()>0.5) {
@@ -78,28 +136,27 @@ public float randnum(float a, float b, float c, float d) {
 	} else {
 		return (float) Math.random() * (d - c) + c;
 	}
-}
+} //generate random number within two bounds
+
 public void genChunk(int i, int j) { //i is y and j is x
 	generateStar((float) 500 * i, (float) 500 * i + 500, (float) 500 * j, (float) 500 * j + 500, minStarSize, maxStarSize, 50);
 	starChunks.add((ArrayList<Star>)stars.clone());
 	stars.clear();
-}
+} //generate a star chunk with id j, i
 
-public long getmill() {
-	long nowMillis = System.currentTimeMillis();
-	return nowMillis;
-}
 public void generateStar(float x1, float x2, float y1, float y2, float size1, float size2, int num) {
 	for (int i = 0; i < num; i++) {
 		stars.add(new Star(randnum(x1, x2, x1, x2), randnum(y1, y2, y1, y2), randnum(size1, size2, size1, size2)));
 	}
-}
+} //generates stars with parameters
+
 public int getChunkx() {
 	return (int) Math.floor(globalx / (500));
-}
+} //returns chunk idx from x position
+
 public int getChunky() {
 	return (int) Math.floor(globaly / (500));
-}
+} //returns chunk idy from y position
 
 public void chunkUpdate(){
 	if (chunkx > getChunkx()) {
@@ -127,12 +184,12 @@ public void chunkUpdate(){
 		genChunk(getChunkx() + 1, getChunky() + 1);
 		chunky=getChunky();
 	}
-}
+} //updates the star chunks
 
 public float getAngle(float x1, float y1, float x2, float y2) {
 	float angle = (float) Math.atan2(y2 - y1, x2 - x1);
 	return angle;
-}
+} //gets the angle from one point to another
 
 public void clearChunk() {
 	int loadlimit = 2;
@@ -146,7 +203,8 @@ public void clearChunk() {
 			starChunks.remove(i);
 		i++;
 	}
-}
+} //clears star chunks that can't be seen
+
 public void clearAst() {
 	int x = getChunkx(); 
 	int y = getChunky();
@@ -155,11 +213,19 @@ public void clearAst() {
 			asteroids.remove(i);
 		i++;
 	}
-}
-public void drawStars() {
-	for (int i = 0; i<starChunks.size(); i++) {
-		for (int j = 0; j<starChunks.get(i).size(); j++) {
+} //clears asteroids that are too far away
+
+public void drawStars(){
+	for (int i = 0; i < starChunks.size(); i++) {
+		for (int j = 0; j < starChunks.get(i).size(); j++) {
 			starChunks.get(i).get(j).show();
 		}
 	}
+} //draws the stars
+
+public void hyperSpace(){
+	player.setPointDirection(Math.random() * 2 * PI);
+	globalx += Math.random() * 1000 - 500;
+	globaly += Math.random() * 1000 - 500;
+	player.setSpeed(0, 0, 0, 0);
 }
