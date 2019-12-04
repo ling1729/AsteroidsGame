@@ -19,7 +19,7 @@ private Spaceship player;
 
 public void setup() 
 {
-	player = new Spaceship((float) sizew / 2, (float) sizeh / 2, PI);
+	player = new Spaceship(0, 0, PI);
 	size(500, 500);
 	generateAst(
 		(float) globalx - 100,
