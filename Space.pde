@@ -1,3 +1,4 @@
+
 abstract class Space extends Floater //Do NOT modify the Floater class! Make changes in the Spaceship class 
 {   
 	protected float[] xCorners;   
@@ -20,4 +21,3 @@ abstract class Space extends Floater //Do NOT modify the Floater class! Make cha
 	}   
 	
 } 
-//modified floater so I can work with it easier
