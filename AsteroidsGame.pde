@@ -19,14 +19,17 @@ private Spaceship player;
 
 public void setup() 
 {
-	player = new Spaceship(0, 0, PI);
+	player = new Spaceship(250, 250, PI);
 	size(500, 500);
 	generateAst(
-		(float) globalx - 100,
-		(float) globalx, 
-		(float) globalx + sizew, (float)globalx + sizew+100, 
-		(float) globaly - 100, (float)globaly, (float) globaly + sizeh, 
-		(float) globaly + sizeh + 100, 1, 3, 10
+		(float) globalx - 200,
+		(float) globalx - 100, 
+		(float) globalx + sizew + 100, 
+		(float) globalx + sizew + 200, 
+		(float) globaly - 200,
+		(float) globaly - 100, 
+		(float) globaly + sizeh + 100, 
+		(float) globaly + sizeh + 200, 1, 3, 10
 	);
 	for (int i =- 1; i < 2; i++) {
 		for (int j =- 1; j < 2; j++) {
@@ -49,6 +52,12 @@ public void setup()
 	//Declare player, generate initial asteroids, and generate initial stars
 
 }
+public void generateAst(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float sp1, float sp2, int num) {
+	for (int i = 0; i < num; i++) {
+		asteroids.add(new Asteroid(randnum(x1, x2, x3, x4), randnum(y1, y2, y3, y4), (float)Math.random() * (2 * PI), randnum(sp1, sp1, sp2, sp2), (float)(Math.random() * 20 + 10)));
+	}
+} //function to generate Asteroids within given bounds
+
 /*public void randomCoords(double centerX, double centerY, double minCircler, double maxCircler, int points, float[] xCoords, float[] yCoords){
 	for(int i = 0; i < points; i ++){
 		xCoords[i] = minCircler + Math.random() * maxCircler
@@ -114,21 +123,46 @@ public void draw()
   for(int i = 0; i < bullets.size(); i++){
     bullets.get(i).update();
     bullets.get(i).show();
+    for(int j = 0; j < asteroids.size(); j ++){
+    	if(pnpoly(convertDouble(asteroids.get(j).getXCoord()), convertDouble(asteroids.get(j).getXCoord()), bullets.get(i).getX(), bullets.get(i).getY()))
+    		test = true;
+    }
   } //show and update bullets
-
   prevMouseX = mouseX;
   prevMouseY = mouseY;
+  System.out.println(test);
 }
+boolean test = false;
+public static double[] convertDouble(float[] input)
+{
+    if (input == null)
+    {
+        return null; // Or throw an exception - your choice
+    }
+    double[] output = new double[input.length];
+    for (int i = 0; i < input.length; i++)
+    {
+        output[i] = input[i];
+    }
+    return output;
+}
+static boolean pnpoly(double[] vertx, double[] verty, double testx, double testy)
+{
+    int nvert = vertx.length;
+    int i, j;
+    boolean c = false;
+    for (i = 0, j = nvert-1; i < nvert; j = i++) {
+        if ( ((verty[i]>testy) != (verty[j]>testy)) &&
+                (testx < (vertx[j]-vertx[i]) * (testy-verty[i]) / (verty[j]-verty[i]) + vertx[i]) )
+            c = !c;
+    }
+    return c;
+}   
 
 void keyReleased() {
 		released = true;
 }
 
-public void generateAst(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float sp1, float sp2, int num) {
-	for (int i = 0; i < num; i++) {
-		asteroids.add(new Asteroid(randnum(x1, x2, x3, x4), randnum(y1, y2, y3, y4), (float)Math.random() * (2 * PI), randnum(sp1, sp2, sp2, sp2), (float)40));
-	}
-} //function to generate Asteroids within given bounds
 
 public float randnum(float a, float b, float c, float d) {
 	if (Math.random()>0.5) {
