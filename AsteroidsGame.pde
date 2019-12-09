@@ -124,40 +124,27 @@ public void draw()
     bullets.get(i).update();
     bullets.get(i).show();
     for(int j = 0; j < asteroids.size(); j ++){
-    	if(pnpoly(convertDouble(asteroids.get(j).getXCoord()), convertDouble(asteroids.get(j).getXCoord()), bullets.get(i).getX(), bullets.get(i).getY()))
-    		test = true;
+		if(collides(asteroids.get(j).getX(), asteroids.get(j).getY(), asteroids.get(j).getSize(), bullets.get(i).getX(), bullets.get(i).getY(), bullets.get(i).getSize())){
+			asteroids.remove(j);
+			j --;
+		}
     }
   } //show and update bullets
   prevMouseX = mouseX;
   prevMouseY = mouseY;
   System.out.println(test);
+  test = false;
 }
 boolean test = false;
-public static double[] convertDouble(float[] input)
-{
-    if (input == null)
-    {
-        return null; // Or throw an exception - your choice
-    }
-    double[] output = new double[input.length];
-    for (int i = 0; i < input.length; i++)
-    {
-        output[i] = input[i];
-    }
-    return output;
-}
-static boolean pnpoly(double[] vertx, double[] verty, double testx, double testy)
-{
-    int nvert = vertx.length;
-    int i, j;
-    boolean c = false;
-    for (i = 0, j = nvert-1; i < nvert; j = i++) {
-        if ( ((verty[i]>testy) != (verty[j]>testy)) &&
-                (testx < (vertx[j]-vertx[i]) * (testy-verty[i]) / (verty[j]-verty[i]) + vertx[i]) )
-            c = !c;
-    }
-    return c;
-}   
+
+public boolean collides(double x1, double y1, double r1, double x2, double y2, double r2){
+    double xDiff = x1 - y2;
+    double yDiff = y1 - y2;
+
+    double distance = Math.sqrt((Math.pow(xDiff, 2) + Math.pow(yDiff, 2)));
+
+    return distance < (r2 + r2);
+} 
 
 void keyReleased() {
 		released = true;

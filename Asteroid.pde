@@ -18,12 +18,10 @@ class Asteroid extends Space{
     }
     myColor = color(171, 111, 0);
   }
-  public float[] getXCoord(){
-    return xCorners;
+  public double getSize(){
+    return mySize;
   }
-  public float[] getYCoord(){
-    return yCorners;
-  }
+
   public void update(){
     for(int i = 0; i < corners; i++){      
       xCorners[i] = (float) (Math.sin((PI*2) / corners * i) * mySize + randomCorners[i] + myCenterX - globalx);

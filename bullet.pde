@@ -6,6 +6,9 @@ class Bullet extends Space {
     this.myPointDirection = adir;
     speed = 20;
   }
+  public double getSize(){
+    return mySize;
+  }
   public void show(){
     fill(255,0,0);
     ellipse((float) (myCenterX - globalx), (float) (myCenterY - globaly), mySize, mySize);
