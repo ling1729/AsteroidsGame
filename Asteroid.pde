@@ -14,7 +14,7 @@ class Asteroid extends Space{
     for(int i = 0; i < corners; i++){
       xCorners[i] = (float) Math.sin((PI*2) / corners * i) * 10;
       yCorners[i] = (float) Math.cos((PI*2) / corners * i) * 10;
-      randomCorners[i] = (float)(Math.random() * (asize /2));
+      randomCorners[i] = (float)-(Math.random() * (asize/3));
     }
     myColor = color(171, 111, 0);
   }
@@ -24,16 +24,14 @@ class Asteroid extends Space{
 
   public void update(){
     for(int i = 0; i < corners; i++){      
-      xCorners[i] = (float) (Math.sin((PI*2) / corners * i) * mySize + randomCorners[i] + myCenterX - globalx);
-      yCorners[i] = (float) (Math.cos((PI*2) / corners * i) * mySize + randomCorners[i] + myCenterY - globaly);
+      xCorners[i] = (float) (Math.sin((PI*2) / corners * i) * mySize/2 + randomCorners[i] + myCenterX - globalx);
+      yCorners[i] = (float) (Math.cos((PI*2) / corners * i) * mySize/2 + randomCorners[i] + myCenterY - globaly);
     }
     myCenterX += Math.cos(myPointDirection) * speed;
     myCenterY += Math.sin(myPointDirection) * speed;
   }
 
   /*public void show() {
-    printArray(xCorners);
-    printArray(yCorners);
     fill(color(171, 111, 0));
     ellipse((float)(myCenterX-globalx), (float)(myCenterY-globaly), mySize, mySize);
   }*/

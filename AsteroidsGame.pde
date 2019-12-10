@@ -54,7 +54,7 @@ public void setup()
 }
 public void generateAst(float x1, float x2, float x3, float x4, float y1, float y2, float y3, float y4, float sp1, float sp2, int num) {
 	for (int i = 0; i < num; i++) {
-		asteroids.add(new Asteroid(randnum(x1, x2, x3, x4), randnum(y1, y2, y3, y4), (float)Math.random() * (2 * PI), randnum(sp1, sp1, sp2, sp2), (float)(Math.random() * 20 + 10)));
+		asteroids.add(new Asteroid(randnum(x1, x2, x3, x4), randnum(y1, y2, y3, y4), (float)Math.random() * (2 * PI), randnum(sp1, sp1, sp2, sp2), (float)(Math.random() * 40 + 20)));
 	}
 } //function to generate Asteroids within given bounds
 
@@ -124,27 +124,25 @@ public void draw()
     bullets.get(i).update();
     bullets.get(i).show();
     for(int j = 0; j < asteroids.size(); j ++){
-		if(collides(asteroids.get(j).getX(), asteroids.get(j).getY(), asteroids.get(j).getSize(), bullets.get(i).getX(), bullets.get(i).getY(), bullets.get(i).getSize())){
+		if(overlaps(asteroids.get(j).getX(), asteroids.get(j).getY(), asteroids.get(j).getSize(), bullets.get(i).getX(), bullets.get(i).getY(), bullets.get(i).getSize())){
 			asteroids.remove(j);
-			j --;
+			bullets.remove(i);
+			break;
 		}
     }
   } //show and update bullets
   prevMouseX = mouseX;
   prevMouseY = mouseY;
-  System.out.println(test);
-  test = false;
 }
-boolean test = false;
+boolean hit = false;
+public boolean overlaps (double x1, double y1, double r1, double x2, double y2, double r2) {
+    double dx = x1 - x2;
+    double dy = y1 - y2;
+    double distance = dx * dx + dy * dy;
+    double radiusSum = r1 + r2;
+    return distance < radiusSum * radiusSum;
+}
 
-public boolean collides(double x1, double y1, double r1, double x2, double y2, double r2){
-    double xDiff = x1 - y2;
-    double yDiff = y1 - y2;
-
-    double distance = Math.sqrt((Math.pow(xDiff, 2) + Math.pow(yDiff, 2)));
-
-    return distance < (r2 + r2);
-} 
 
 void keyReleased() {
 		released = true;
