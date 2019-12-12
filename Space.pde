@@ -33,7 +33,9 @@ abstract class Space extends Floater //Do NOT modify the Floater class! Make cha
       vertex(xCorners[nI], yCorners[nI]);
     }
     endShape(CLOSE);
-    
+    //stroke(0);
+    //fill(color(171, 111, 0));
+    //ellipse((float)(myCenterX-globalx), (float)(myCenterY-globaly), mySize, mySize);
   	}  
 } 
 //modified floater so I can work with it easier
