@@ -14,7 +14,7 @@ class Asteroid extends Space{
     for(int i = 0; i < corners; i++){
       xCorners[i] = (float) Math.sin((PI*2) / corners * i) * 10;
       yCorners[i] = (float) Math.cos((PI*2) / corners * i) * 10;
-      randomCorners[i] = (float)-(Math.random() * (asize)/4)+asize/6;
+      randomCorners[i] = (float) (Math.random() * (asize)/4)+asize/6;
     }
     myColor = color(171, 111, 0);
   }
