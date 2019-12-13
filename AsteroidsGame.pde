@@ -120,7 +120,7 @@ public void draw()
     }
   }
   //see if key is pressed and add a new bullet if there is a long enough delay
-  for(int i = 0; i < bullets.size(); i++){
+  /*for(int i = 0; i < bullets.size(); i++){
     bullets.get(i).update();
     bullets.get(i).show();
     for(int j = 0; j < asteroids.size(); j ++){
@@ -130,7 +130,7 @@ public void draw()
 			break;
 		}
     }
-  } //show and update bullets
+  }*/ //show and update bullets
   prevMouseX = mouseX;
   prevMouseY = mouseY;
 }
