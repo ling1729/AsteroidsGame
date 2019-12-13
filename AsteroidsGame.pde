@@ -124,7 +124,7 @@ public void draw()
     bullets.get(i).update();
     bullets.get(i).show();
     for(int j = 0; j < asteroids.size(); j ++){
-		if(overlaps(asteroids.get(j).getX(), asteroids.get(j).getY(), asteroids.get(j).getSize(), bullets.get(i).getX(), bullets.get(i).getY(), bullets.get(i).getSize())){
+		if(overlaps((float) asteroids.get(j).getX(), (float) asteroids.get(j).getY(), asteroids.get(j).getSize(), (float) bullets.get(i).getX(), (float) bullets.get(i).getY(), bullets.get(i).getSize())){
 			asteroids.remove(j);
 			bullets.remove(i);
 			break;
@@ -135,16 +135,16 @@ public void draw()
   prevMouseY = mouseY;
 }
 boolean hit = false;
-public boolean overlaps (double x1, double y1, double r1, double x2, double y2, double r2) {
-    double dx = x1 - x2;
-    double dy = y1 - y2;
-    double distance = dx * dx + dy * dy;
-    double radiusSum = r1 + r2;
+public boolean overlaps (float x1, float y1, float r1, float x2, float y2, float r2) {
+    float dx = x1 - x2;
+    float dy = y1 - y2;
+    float distance = dx * dx + dy * dy;
+    float radiusSum = r1 + r2;
     return distance < radiusSum * radiusSum;
 }
 
 
-void keyReleased() {
+public void keyReleased() {
 		released = true;
 }
 

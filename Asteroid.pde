@@ -18,7 +18,7 @@ class Asteroid extends Space{
     }
     myColor = color(171, 111, 0);
   }
-  public double getSize(){
+  public float getSize(){
     return mySize;
   }
 

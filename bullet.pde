@@ -6,7 +6,7 @@ class Bullet extends Space {
     this.myPointDirection = adir;
     speed = 20;
   }
-  public double getSize(){
+  public float getSize(){
     return mySize;
   }
   public void show(){
